@@ -1,168 +1,57 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="en">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>L'Amour | An Interactive Experience</title>\
-    <style>\
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&family=Lato:wght@300;400&display=swap');\
-\
-        :root \{\
-            --bg: #faf7f2;\
-            --rose: #eecbc9;\
-            --gold: #d4af37;\
-            --text: #5a4d4a;\
-        \}\
-\
-        body \{ \
-            background-color: var(--bg); \
-            color: var(--text);\
-            font-family: 'Lato', sans-serif;\
-            margin: 0;\
-            display: flex;\
-            justify-content: center;\
-            align-items: center;\
-            height: 100vh;\
-            overflow: hidden;\
-        \}\
-\
-        #app-container \{\
-            text-align: center;\
-            max-width: 600px;\
-            padding: 40px;\
-            animation: fadeIn 2s ease-in;\
-        \}\
-\
-        h1 \{\
-            font-family: 'Playfair Display', serif;\
-            font-weight: 400;\
-            font-size: 2.5rem;\
-            letter-spacing: 4px;\
-            text-transform: uppercase;\
-            margin-bottom: 10px;\
-            color: var(--text);\
-        \}\
-\
-        .subtitle \{\
-            font-style: italic;\
-            font-family: 'Playfair Display', serif;\
-            opacity: 0.8;\
-            margin-bottom: 40px;\
-        \}\
-\
-        .aura-container \{\
-            display: flex;\
-            justify-content: center;\
-            gap: 30px;\
-            margin-top: 20px;\
-        \}\
-\
-        .aura \{\
-            width: 80px;\
-            height: 80px;\
-            border-radius: 50%;\
-            cursor: pointer;\
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);\
-            filter: blur(15px);\
-            opacity: 0.6;\
-        \}\
-\
-        .aura:hover \{\
-            filter: blur(5px);\
-            opacity: 1;\
-            transform: scale(1.2);\
-        \}\
-\
-        .aura-1 \{ background: #fce1e4; \} /* Soft Pink */\
-        .aura-2 \{ background: #e2ece9; \} /* Sage Mint */\
-        .aura-3 \{ background: #e0d8f0; \} /* Lavender Bloom */\
-\
-        #result-screen \{\
-            display: none;\
-            padding: 20px;\
-        \}\
-\
-        .quote-display \{\
-            font-family: 'Playfair Display', serif;\
-            font-size: 1.8rem;\
-            line-height: 1.5;\
-            margin-bottom: 30px;\
-        \}\
-\
-        .divider \{\
-            width: 50px;\
-            height: 1px;\
-            background: var(--gold);\
-            margin: 20px auto;\
-        \}\
-\
-        @keyframes fadeIn \{\
-            from \{ opacity: 0; transform: translateY(10px); \}\
-            to \{ opacity: 1; transform: translateY(0); \}\
-        \}\
-\
-        .btn-restart \{\
-            margin-top: 30px;\
-            background: none;\
-            border: 1px solid var(--text);\
-            padding: 10px 25px;\
-            text-transform: uppercase;\
-            letter-spacing: 2px;\
-            font-size: 0.8rem;\
-            cursor: pointer;\
-            transition: 0.3s;\
-        \}\
-\
-        .btn-restart:hover \{\
-            background: var(--text);\
-            color: white;\
-        \}\
-    </style>\
-</head>\
-<body>\
-\
-    <div id="app-container">\
-        <div id="start-screen">\
-            <h1>L'Amour</h1>\
-            <p class="subtitle">Which energy does your heart gravitate toward today?</p>\
-            <div class="aura-container">\
-                <div class="aura aura-1" onclick="showResult(0)"></div>\
-                <div class="aura aura-2" onclick="showResult(1)"></div>\
-                <div class="aura aura-3" onclick="showResult(2)"></div>\
-            </div>\
-        </div>\
-\
-        <div id="result-screen">\
-            <div class="divider"></div>\
-            <div class="quote-display" id="quote-text"></div>\
-            <div class="divider"></div>\
-            <button class="btn-restart" onclick="location.reload()">Return</button>\
-        </div>\
-    </div>\
-\
-    <script>\
-        const insights = [\
-            "Your heart is a soft light; let it guide you toward the peace you deserve.",\
-            "Growth is quiet. Trust the timing of your life and the love that is coming.",\
-            "You are a rare find. Do not settle for a love that doesn't feel like home."\
-        ];\
-\
-        function showResult(index) \{\
-            document.getElementById('start-screen').style.display = 'none';\
-            const result = document.getElementById('result-screen');\
-            const text = document.getElementById('quote-text');\
-            \
-            text.innerText = insights[index];\
-            result.style.display = 'block';\
-            result.style.animation = 'fadeIn 2s ease-out';\
-        \}\
-    </script>\
-</body>\
-</html>}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Amour | An Interactive Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&family=Lato:wght@300;400&display=swap');
+        :root { --bg: #faf7f2; --rose: #eecbc9; --gold: #d4af37; --text: #5a4d4a; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        #app-container { text-align: center; max-width: 600px; padding: 40px; animation: fadeIn 2s ease-in; }
+        h1 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 2.5rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
+        .subtitle { font-style: italic; font-family: 'Playfair Display', serif; opacity: 0.8; margin-bottom: 40px; }
+        .aura-container { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+        .aura { width: 80px; height: 80px; border-radius: 50%; cursor: pointer; transition: all 0.5s ease; filter: blur(15px); opacity: 0.6; }
+        .aura:hover { filter: blur(5px); opacity: 1; transform: scale(1.2); }
+        .aura-1 { background: #fce1e4; } .aura-2 { background: #e2ece9; } .aura-3 { background: #e0d8f0; }
+        #result-screen { display: none; padding: 20px; }
+        .quote-display { font-family: 'Playfair Display', serif; font-size: 1.8rem; line-height: 1.5; margin-bottom: 30px; }
+        .divider { width: 50px; height: 1px; background: var(--gold); margin: 20px auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-restart { margin-top: 30px; background: none; border: 1px solid var(--text); padding: 10px 25px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <div id="start-screen">
+            <h1>L'Amour</h1>
+            <p class="subtitle">Which energy does your heart gravitate toward today?</p>
+            <div class="aura-container">
+                <div class="aura aura-1" onclick="showResult(0)"></div>
+                <div class="aura aura-2" onclick="showResult(1)"></div>
+                <div class="aura aura-3" onclick="showResult(2)"></div>
+            </div>
+        </div>
+        <div id="result-screen">
+            <div class="divider"></div>
+            <div class="quote-display" id="quote-text"></div>
+            <div class="divider"></div>
+            <button class="btn-restart" onclick="location.reload()">Return</button>
+        </div>
+    </div>
+    <script>
+        const insights = [
+            "Your heart is a soft light; let it guide you toward the peace you deserve.",
+            "Growth is quiet. Trust the timing of your life and the love that is coming.",
+            "You are a rare find. Do not settle for a love that doesn't feel like home."
+        ];
+        function showResult(index) {
+            document.getElementById('start-screen').style.display = 'none';
+            const result = document.getElementById('result-screen');
+            document.getElementById('quote-text').innerText = insights[index];
+            result.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
