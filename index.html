@@ -155,22 +155,141 @@
     </div>
 
     <script>
-        const colorData = [
-            { name: "Ivory", hex: "#fafaf0", quote: "Clarity is not found; it is allowed when the noise stops.", movie: "Columbus", book: "Silence" },
-            { name: "Champagne", hex: "#f1e9d2", quote: "Your worth is a baseline, not a reward for performance.", movie: "The King's Speech", book: "The Worthy" },
-            { name: "Blush Rose", hex: "#f7d9d9", quote: "Tenderness is the highest form of courage.", movie: "Portrait of a Lady on Fire", book: "Letters to a Young Poet" },
-            { name: "Dusty Mauve", hex: "#bcaaa4", quote: "Some things hurt because they mattered.", movie: "In the Mood for Love", book: "The Year of Magical Thinking" },
-            { name: "Soft Sage", hex: "#c8d6ca", quote: "Growth is silent. Do not mistake stillness for lack of progress.", movie: "Minari", book: "The Hidden Life of Trees" },
-            { name: "Pale Olive", hex: "#bab86c", quote: "Root yourself in the present; the future is a shadow.", movie: "First Cow", book: "The Overstory" },
-            { name: "Mist Blue", hex: "#cfd8dc", quote: "Loneliness is just space for the self to return home.", movie: "Lost in Translation", book: "Journal of a Solitude" },
-            { name: "Powder Blue", hex: "#b0c4de", quote: "Quiet hope is louder than loud despair.", movie: "Wings of Desire", book: "Hope in the Dark" },
-            { name: "Periwinkle", hex: "#c5cae9", quote: "Imagination is the only bridge to the impossible.", movie: "Big Fish", book: "The Night Circus" },
-            { name: "Lavender Grey", hex: "#d1d1e0", quote: "It is okay to be tired. Even the moon rests.", movie: "Manchester by the Sea", book: "The Noonday Demon" },
-            { name: "Warm Taupe", hex: "#d7ccc8", quote: "Acceptance is the softest place to land.", movie: "Nomadland", book: "Tiny Beautiful Things" },
-            { name: "Sand Beige", hex: "#f5f5dc", quote: "You are allowed to simply exist. Rest is a right.", movie: "My Neighbor Totoro", book: "Wintering" },
-            { name: "Butter Yellow", hex: "#fff9c4", quote: "Joy is a choice that requires gentle practice.", movie: "Amélie", book: "The Book of Delights" },
-            { name: "Muted Peach", hex: "#ffccbc", quote: "Connection is the thread that keeps us from drifting.", movie: "Before Sunrise", book: "The Art of Loving" },
-            { name: "Soft Terracotta", hex: "#e6be8a", quote: "Rebuilding is a slow dance. Be patient with your hands.", movie: "The Secret World of Arrietty", book: "Wabi Sabi" }
+        const colorData = [const colorPalette = 
+  {
+    name: "Ivory",
+    hex: "#fafaf0",
+    quote: "When you suffer, I suffer with you.",
+    movie: "Columbus",
+    book: "Silence",
+    source: "Shūsaku Endō, Silence (1966)"
+  },
+
+  {
+    name: "Champagne",
+    hex: "#f1e9d2",
+    quote: "No matter what gets done and how much is left undone, I am enough.",
+    movie: "The King's Speech",
+    book: "The Gifts of Imperfection",
+    source: "Brené Brown, The Gifts of Imperfection (2010)"
+  },
+
+  {
+    name: "Blush Rose",
+    hex: "#f7d9d9",
+    quote: "Perhaps everything that frightens us is something helpless that wants our love.",
+    movie: "Portrait of a Lady on Fire",
+    book: "Letters to a Young Poet",
+    source: "Rainer Maria Rilke, Letters to a Young Poet (1903)"
+  },
+
+  {
+    name: "Dusty Mauve",
+    hex: "#bcaaa4",
+    quote: "Grief turns out to be a place none of us know until we reach it.",
+    movie: "In the Mood for Love",
+    book: "The Year of Magical Thinking",
+    source: "Joan Didion, The Year of Magical Thinking (2005)"
+  },
+
+  {
+    name: "Soft Sage",
+    hex: "#c8d6ca",
+    quote: "When you know trees experience pain and have memories, you can no longer just chop them down.",
+    movie: "Minari",
+    book: "The Hidden Life of Trees",
+    source: "Peter Wohlleben, The Hidden Life of Trees (2015)"
+  },
+
+  {
+    name: "Pale Olive",
+    hex: "#bab86c",
+    quote: "We really only live in the Now.",
+    movie: "First Cow",
+    book: "The Overstory",
+    source: "Richard Powers, The Overstory (2018)"
+  },
+
+  {
+    name: "Mist Blue",
+    hex: "#cfd8dc",
+    quote: "Loneliness is the poverty of self; solitude is the richness of self.",
+    movie: "Lost in Translation",
+    book: "Journal of a Solitude",
+    source: "May Sarton, Journal of a Solitude (1973)"
+  },
+
+  {
+    name: "Powder Blue",
+    hex: "#b0c4de",
+    quote: "To hope is to give yourself to the future.",
+    movie: "Wings of Desire",
+    book: "Hope in the Dark",
+    source: "Rebecca Solnit, Hope in the Dark (2004)"
+  },
+
+  {
+    name: "Periwinkle",
+    hex: "#c5cae9",
+    quote: "The circus arrives without warning.",
+    movie: "Big Fish",
+    book: "The Night Circus",
+    source: "Erin Morgenstern, The Night Circus (2011)"
+  },
+
+  {
+    name: "Lavender Grey",
+    hex: "#d1d1e0",
+    quote: "The opposite of depression is not happiness, but vitality.",
+    movie: "Manchester by the Sea",
+    book: "The Noonday Demon",
+    source: "Andrew Solomon, The Noonday Demon (2001)"
+  },
+
+  {
+    name: "Warm Taupe",
+    hex: "#d7ccc8",
+    quote: "Acceptance is a small, quiet room.",
+    movie: "Nomadland",
+    book: "Tiny Beautiful Things",
+    source: "Cheryl Strayed, Tiny Beautiful Things (2012)"
+  },
+
+  {
+    name: "Sand Beige",
+    hex: "#f5f5dc",
+    quote: "It often seems easier to stay in winter. But we are brave, and the new world awaits us.",
+    movie: "My Neighbor Totoro",
+    book: "Wintering",
+    source: "Katherine May, Wintering (2020)"
+  },
+
+  {
+    name: "Butter Yellow",
+    hex: "#fff9c4",
+    quote: "Joy is the mostly invisible, the underground union between us.",
+    movie: "Amélie",
+    book: "The Book of Delights",
+    source: "Ross Gay, The Book of Delights (2019)"
+  },
+
+  {
+    name: "Muted Peach",
+    hex: "#ffccbc",
+    quote: "Love is a decision, it is a judgment, it is a promise.",
+    movie: "Before Sunrise",
+    book: "The Art of Loving",
+    source: "Erich Fromm, The Art of Loving (1956)"
+  },
+
+  {
+    name: "Soft Terracotta",
+    hex: "#e6be8a",
+    quote: "Wabi-sabi is a beauty of things imperfect, impermanent, and incomplete.",
+    movie: "The Secret World of Arrietty",
+    book: "Wabi-Sabi",
+    source: "Leonard Koren, Wabi-Sabi (1994)"
+  }
         ];
 
         const grid = document.getElementById('main-grid');
