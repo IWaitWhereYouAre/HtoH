@@ -3,331 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Color Oracle | A Sanctuary</title>
+    <title>L'Amour Oracle | The Ritual</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&family=Lato:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap');
 
-        :root {
-            --text: #4a4240;
-            --bg: #faf7f2;
+        :root { 
+            --bg: #faf7f2; 
+            --text: #3d3533; 
+            --accent: #c2a69d; 
+            --transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body { 
             background-color: var(--bg); 
             color: var(--text);
-            font-family: 'Lato', sans-serif;
+            font-family: 'Lato', sans-serif; 
             margin: 0;
-            transition: background-color 1.5s ease;
-            display: flex;
-            justify-content: center;
+            display: flex; 
+            justify-content: center; 
             align-items: center;
-            min-height: 100vh;
+            min-height: 100vh; 
+            transition: background-color var(--transition);
+            overflow-x: hidden;
         }
 
-        #app-container {
-            text-align: center;
-            width: 90%;
-            max-width: 800px;
-            padding: 40px;
-        }
+        #app-container { text-align: center; max-width: 900px; padding: 40px; width: 100%; position: relative; }
 
+        /* Typography */
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-            font-size: 2rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif; font-weight: 400;
+            font-size: 2.2rem; letter-spacing: 12px; text-transform: uppercase;
+            margin-bottom: 5px; opacity: 0.8;
         }
 
-        /* Color Grid */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .subtitle {
+            font-family: 'Playfair Display', serif; font-style: italic;
+            opacity: 0.5; margin-bottom: 40px; letter-spacing: 2px; font-size: 0.9rem;
         }
 
-        .color-circle {
-            aspect-ratio: 1;
-            border-radius: 50%;
+        /* Shuffle Deck Mechanics */
+        .deck-container {
+            position: relative;
+            height: 300px;
+            margin: 0 auto;
+            max-width: 200px;
             cursor: pointer;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s;
-            filter: saturate(0.8);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .color-circle:hover {
-            transform: scale(1.1);
-            filter: saturate(1.2);
+        .card-sprite {
+            position: absolute;
+            width: 180px;
+            height: 260px;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .color-circle.used {
-            opacity: 0;
-            pointer-events: none;
+        /* Shuffle Animation */
+        .shuffling .card-sprite {
+            animation: card-wiggle 0.8s infinite;
         }
 
-        /* Reveal Page */
-        #reveal-screen {
-            display: none;
-            opacity: 0;
-            transition: opacity 2s ease;
+        @keyframes card-wiggle {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-55%, -52%) rotate(-2deg); }
+            75% { transform: translate(-45%, -48%) rotate(2deg); }
+            100% { transform: translate(-50%, -50%) rotate(0deg); }
         }
 
-        .quote {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            line-height: 1.4;
-            font-style: italic;
-            margin: 60px 0;
-            animation: breathe 4s infinite ease-in-out;
-        }
-
-        .divider {
-            width: 40px;
-            height: 1px;
-            background: var(--text);
-            margin: 30px auto;
-            opacity: 0.3;
-        }
-
-        .rec-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+        .shuffle-text {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            margin-top: 30px;
+            height: 20px;
+            opacity: 0.6;
         }
 
-        .rec-item span {
+        /* Reveal Screen */
+        #result-screen { display: none; opacity: 0; transition: opacity 2s ease; }
+
+        .orientation-line {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 15px;
             display: block;
-            font-family: 'Playfair Display', serif;
-            text-transform: none;
-            font-size: 1.2rem;
-            margin-top: 10px;
-            letter-spacing: 0;
         }
 
-        @keyframes breathe {
-            0%, 100% { opacity: 0.8; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-5px); }
+        .quote-display {
+            font-family: 'Playfair Display', serif; font-size: 1.8rem;
+            line-height: 1.5; margin: 20px 0; font-weight: 400;
         }
 
-        .btn-return {
-            margin-top: 80px;
-            background: none;
-            border: none;
-            border-bottom: 1px solid var(--text);
-            padding: 5px 0;
-            cursor: pointer;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text);
+        .rec-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            margin-top: 50px; text-align: left; border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 40px;
         }
+
+        .rec-label { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; display: block; margin-bottom: 8px; }
+        .rec-value { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; display: block; }
+
+        .btn-action {
+            margin-top: 60px; background: none; border: 1px solid rgba(0,0,0,0.1);
+            padding: 12px 30px; text-transform: uppercase; letter-spacing: 3px; 
+            font-size: 0.65rem; cursor: pointer; transition: 0.4s;
+        }
+
+        .btn-action:hover { background: var(--text); color: white; }
 
         @media (max-width: 600px) {
-            .rec-container { flex-direction: column; gap: 20px; }
-            .quote { font-size: 1.6rem; }
+            .rec-grid { grid-template-columns: 1fr; gap: 25px; }
+            .quote-display { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
     <div id="app-container">
-        <div id="grid-screen">
-            <h1>The Color Oracle</h1>
-            <p style="font-style: italic; opacity: 0.6; margin-bottom: 40px;">Pick the color you are drawn to right now.</p>
-            <div class="color-grid" id="main-grid"></div>
+        <div id="ritual-screen">
+            <h1>L'Amour</h1>
+            <p class="subtitle" id="ritual-sub">Prepare the deck. Choose when it feels finished.</p>
+            
+            <div class="deck-container" id="deck" onclick="handleDeckClick()">
+                <div class="card-sprite" style="transform: translate(-52%, -48%) rotate(-1deg);"></div>
+                <div class="card-sprite" style="transform: translate(-48%, -52%) rotate(1deg);"></div>
+                <div class="card-sprite" id="top-card"></div>
+            </div>
+
+            <p class="shuffle-text" id="shuffle-msg">Click to Shuffle</p>
         </div>
 
-        <div id="reveal-screen">
-            <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; opacity: 0.5;">For you, right now:</p>
-            <div class="quote" id="quote-display"></div>
-            <div class="divider"></div>
-            <div class="rec-container">
-                <div class="rec-item">🎬 Movie <span><i id="movie-display"></i></span></div>
-                <div class="rec-item">📖 Book <span><i id="book-display"></i></span></div>
+        <div id="result-screen">
+            <span class="orientation-line" id="orientation-text">Orientation</span>
+            <div class="quote-display" id="quote-text"></div>
+            <span class="subtitle" id="quote-source" style="margin-bottom:0;"></span>
+            
+            <div class="rec-grid">
+                <div class="rec-item">
+                    <span class="rec-label">Cinematic</span>
+                    <span class="rec-value" id="movie-text"></span>
+                </div>
+                <div class="rec-item">
+                    <span class="rec-label">Literary</span>
+                    <span class="rec-value" id="book-text"></span>
+                </div>
             </div>
-            <button class="btn-return" onclick="closeReveal()">Another color found me</button>
+
+            <button class="btn-action" onclick="resetRitual()">Return the Card</button>
         </div>
     </div>
 
     <script>
-        const colorData = [const colorPalette = 
-  {
-    name: "Ivory",
-    hex: "#fafaf0",
-    quote: "When you suffer, I suffer with you.",
-    movie: "Columbus",
-    book: "Silence",
-    source: "Shūsaku Endō, Silence (1966)"
-  },
-
-  {
-    name: "Champagne",
-    hex: "#f1e9d2",
-    quote: "No matter what gets done and how much is left undone, I am enough.",
-    movie: "The King's Speech",
-    book: "The Gifts of Imperfection",
-    source: "Brené Brown, The Gifts of Imperfection (2010)"
-  },
-
-  {
-    name: "Blush Rose",
-    hex: "#f7d9d9",
-    quote: "Perhaps everything that frightens us is something helpless that wants our love.",
-    movie: "Portrait of a Lady on Fire",
-    book: "Letters to a Young Poet",
-    source: "Rainer Maria Rilke, Letters to a Young Poet (1903)"
-  },
-
-  {
-    name: "Dusty Mauve",
-    hex: "#bcaaa4",
-    quote: "Grief turns out to be a place none of us know until we reach it.",
-    movie: "In the Mood for Love",
-    book: "The Year of Magical Thinking",
-    source: "Joan Didion, The Year of Magical Thinking (2005)"
-  },
-
-  {
-    name: "Soft Sage",
-    hex: "#c8d6ca",
-    quote: "When you know trees experience pain and have memories, you can no longer just chop them down.",
-    movie: "Minari",
-    book: "The Hidden Life of Trees",
-    source: "Peter Wohlleben, The Hidden Life of Trees (2015)"
-  },
-
-  {
-    name: "Pale Olive",
-    hex: "#bab86c",
-    quote: "We really only live in the Now.",
-    movie: "First Cow",
-    book: "The Overstory",
-    source: "Richard Powers, The Overstory (2018)"
-  },
-
-  {
-    name: "Mist Blue",
-    hex: "#cfd8dc",
-    quote: "Loneliness is the poverty of self; solitude is the richness of self.",
-    movie: "Lost in Translation",
-    book: "Journal of a Solitude",
-    source: "May Sarton, Journal of a Solitude (1973)"
-  },
-
-  {
-    name: "Powder Blue",
-    hex: "#b0c4de",
-    quote: "To hope is to give yourself to the future.",
-    movie: "Wings of Desire",
-    book: "Hope in the Dark",
-    source: "Rebecca Solnit, Hope in the Dark (2004)"
-  },
-
-  {
-    name: "Periwinkle",
-    hex: "#c5cae9",
-    quote: "The circus arrives without warning.",
-    movie: "Big Fish",
-    book: "The Night Circus",
-    source: "Erin Morgenstern, The Night Circus (2011)"
-  },
-
-  {
-    name: "Lavender Grey",
-    hex: "#d1d1e0",
-    quote: "The opposite of depression is not happiness, but vitality.",
-    movie: "Manchester by the Sea",
-    book: "The Noonday Demon",
-    source: "Andrew Solomon, The Noonday Demon (2001)"
-  },
-
-  {
-    name: "Warm Taupe",
-    hex: "#d7ccc8",
-    quote: "Acceptance is a small, quiet room.",
-    movie: "Nomadland",
-    book: "Tiny Beautiful Things",
-    source: "Cheryl Strayed, Tiny Beautiful Things (2012)"
-  },
-
-  {
-    name: "Sand Beige",
-    hex: "#f5f5dc",
-    quote: "It often seems easier to stay in winter. But we are brave, and the new world awaits us.",
-    movie: "My Neighbor Totoro",
-    book: "Wintering",
-    source: "Katherine May, Wintering (2020)"
-  },
-
-  {
-    name: "Butter Yellow",
-    hex: "#fff9c4",
-    quote: "Joy is the mostly invisible, the underground union between us.",
-    movie: "Amélie",
-    book: "The Book of Delights",
-    source: "Ross Gay, The Book of Delights (2019)"
-  },
-
-  {
-    name: "Muted Peach",
-    hex: "#ffccbc",
-    quote: "Love is a decision, it is a judgment, it is a promise.",
-    movie: "Before Sunrise",
-    book: "The Art of Loving",
-    source: "Erich Fromm, The Art of Loving (1956)"
-  },
-
-  {
-    name: "Soft Terracotta",
-    hex: "#e6be8a",
-    quote: "Wabi-sabi is a beauty of things imperfect, impermanent, and incomplete.",
-    movie: "The Secret World of Arrietty",
-    book: "Wabi-Sabi",
-    source: "Leonard Koren, Wabi-Sabi (1994)"
-  }
+        const cards = [
+            { 
+                name: "Mist Blue", hex: "#cfd8dc", 
+                orientation: "On the Richness of Solitude",
+                quote: "Loneliness is the poverty of self; solitude is the richness of self.", 
+                source: "May Sarton", movie: "Lost in Translation", book: "Journal of a Solitude" 
+            },
+            { 
+                name: "Blush Rose", hex: "#f7d9d9", 
+                orientation: "On the Fear of Vulnerability",
+                quote: "Everything that frightens us is something helpless that wants our love.", 
+                source: "Rainer Maria Rilke", movie: "The Shape of Water", book: "Letters to a Young Poet" 
+            },
+            { 
+                name: "Dusty Mauve", hex: "#bcaaa4", 
+                orientation: "On the Perception of Truth",
+                quote: "Love is not blind; it sees more, not less.", 
+                source: "Erich Fromm", movie: "In the Mood for Love", book: "The Art of Loving" 
+            },
+            { 
+                name: "Soft Sage", hex: "#c8d6ca", 
+                orientation: "On Attentiveness",
+                quote: "The world is full of magic things, waiting for our senses to grow sharper.", 
+                source: "W.B. Yeats", movie: "Song of the Sea", book: "The Wind Among the Reeds" 
+            }
         ];
 
-        const grid = document.getElementById('main-grid');
-        const gridScreen = document.getElementById('grid-screen');
-        const revealScreen = document.getElementById('reveal-screen');
+        let shuffleCount = 0;
+        let isShuffling = false;
+        const messages = [
+            "Some things cannot be chosen directly.",
+            "Let the order change.",
+            "Not everything reveals itself at once.",
+            "Permission to pause."
+        ];
 
-        colorData.forEach((item, index) => {
-            const circle = document.createElement('div');
-            circle.className = 'color-circle';
-            circle.style.backgroundColor = item.hex;
-            circle.id = `color-${index}`;
-            circle.onclick = () => selectColor(index);
-            grid.appendChild(circle);
-        });
-
-        function selectColor(index) {
-            const data = colorData[index];
-            document.body.style.backgroundColor = data.hex;
-            
-            // Mark as used
-            document.getElementById(`color-${index}`).classList.add('used');
-
-            gridScreen.style.display = 'none';
-            revealScreen.style.display = 'block';
-            setTimeout(() => { revealScreen.style.opacity = '1'; }, 50);
-
-            document.getElementById('quote-display').innerText = data.quote;
-            document.getElementById('movie-display').innerText = data.movie;
-            document.getElementById('book-display').innerText = data.book;
+        function handleDeckClick() {
+            if (shuffleCount < 3) {
+                startShuffle();
+            } else {
+                revealCard();
+            }
         }
 
-        function closeReveal() {
-            revealScreen.style.opacity = '0';
+        function startShuffle() {
+            if (isShuffling) return;
+            isShuffling = true;
+            shuffleCount++;
+            
+            const deck = document.getElementById('deck');
+            const msg = document.getElementById('shuffle-msg');
+            
+            deck.classList.add('shuffling');
+            msg.innerText = messages[shuffleCount % messages.length];
+
             setTimeout(() => {
-                revealScreen.style.display = 'none';
-                gridScreen.style.display = 'block';
-                document.body.style.backgroundColor = "#faf7f2";
+                deck.classList.remove('shuffling');
+                isShuffling = false;
+                if (shuffleCount >= 3) {
+                    msg.innerText = "The deck is ready. Choose your card.";
+                    document.getElementById('ritual-sub').innerText = "Click the deck once more to draw.";
+                }
+            }, 1200);
+        }
+
+        function revealCard() {
+            const data = cards[Math.floor(Math.random() * cards.length)];
+            
+            document.getElementById('ritual-screen').style.opacity = '0';
+            document.body.style.backgroundColor = data.hex;
+
+            setTimeout(() => {
+                document.getElementById('ritual-screen').style.display = 'none';
+                const res = document.getElementById('result-screen');
+                res.style.display = 'block';
+                
+                document.getElementById('orientation-text').innerText = data.orientation;
+                document.getElementById('quote-text').innerText = data.quote;
+                document.getElementById('quote-source').innerText = `— ${data.source}`;
+                document.getElementById('movie-text').innerText = data.movie;
+                document.getElementById('book-text').innerText = data.book;
+
+                setTimeout(() => { res.style.opacity = '1'; }, 50);
             }, 1000);
+        }
+
+        function resetRitual() {
+            location.reload(); // Simplest way to return to "Silence"
         }
     </script>
 </body>
